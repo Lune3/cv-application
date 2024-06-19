@@ -55,14 +55,34 @@ function Experience(){
     )
 }
 
+function Projects(){
+    return (
+        <section>
+            <h2>Project</h2>
+            <input type="text" placeholder='Name of the project'/>
+            <input type="text" placeholder='technology used' />
+            <label htmlFor="to">To</label>
+            <input type="date" id='to'/>
+            <label htmlFor="from">From</label>
+            <input type="date" id='from'/>
+            <div>
+                <input type="text" placeholder='project Description' />
+                <button>Add project Description</button>
+            </div>
+            <button>Submit project</button>
+        </section>
+    )
+}
+
 function InputSection(){
     return (
         <>
             <NameAndContactInputs/>
             <Education/>
             <Experience/>
+            <Projects/>
         </>
     )
 }
 
-export default InputSection;
+export {InputSection};
