@@ -21,7 +21,7 @@ function NameAndContactInputs(){
 function Education(){
     
     return (
-        <div className='education'>
+        <section className='educationInput'>
             <h2>Education</h2>
             <input type="text" placeholder='Education'/>
             <input type="text" placeholder='Major'/>
@@ -31,13 +31,13 @@ function Education(){
             <label htmlFor="from">From</label>
             <input type="date" id='from'/>
             <button>Add Education</button>
-        </div>
+        </section>
     )
 }
 
 function Experience(){
     return (
-        <section className='experience'>
+        <section className='experienceInput'>
             <h2>Experience</h2>
             <input type="text" placeholder='Job Title'/>
             <input type="text" placeholder='Company or Institute name'/>
@@ -57,7 +57,7 @@ function Experience(){
 
 function Projects(){
     return (
-        <section>
+        <section className='projectsInput'>
             <h2>Project</h2>
             <input type="text" placeholder='Name of the project'/>
             <input type="text" placeholder='technology used' />
@@ -74,6 +74,34 @@ function Projects(){
     )
 }
 
+function Skills(){
+    return (
+        <section className='skillsInput'>
+            <h2>Technical Skills</h2>
+            <div>
+                <label htmlFor="language">Language</label>
+                <input type="text" id='language'/>
+                <button>Add language</button>
+            </div>
+            <div>
+                <label htmlFor="framework">Framework</label>
+                <input type="text" id='framework'/>
+                <button>Add Framework</button>
+            </div>
+            <div>
+                <label htmlFor="developerTool">Developer Tool</label>
+                <input type="text" id='developerTool'/>
+                <button>Add Developer Tool</button>
+            </div>
+            <div>
+                <label htmlFor="libraries">Libraries</label>
+                <input type="text" id='libraries'/>
+                <button>Add Library</button>
+            </div>
+        </section>
+    )
+}
+
 function InputSection(){
     return (
         <>
@@ -81,6 +109,7 @@ function InputSection(){
             <Education/>
             <Experience/>
             <Projects/>
+            <Skills/>
         </>
     )
 }
