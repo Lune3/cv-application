@@ -1,7 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-
-const contacts = [{contact:"Phone Number",id:uuidv4()},{contact:"Email",id:uuidv4()},{contact:"GitHub",id:uuidv4()},{contact:"LinkedIn",id:uuidv4()}];
-
+import {contacts} from './data';
 
 function NameAndContactInputs(){
     const contactsList = contacts.map(contact => {
@@ -11,7 +8,6 @@ function NameAndContactInputs(){
             </li>
         )
     })
-
     return (
         <section>
             <input type='text' placeholder="Your Name"/>
@@ -20,10 +16,26 @@ function NameAndContactInputs(){
     )
 }
 
+function Education(){
+    
+    return (
+        <div>
+            <input type="text" placeholder='Education'/>
+            <input type="text" placeholder='Major'/>
+            <input type="text" placeholder='place'/>
+            <label htmlFor="to">To</label>
+            <input type="date" id='to'/>
+            <label htmlFor="from">From</label>
+            <input type="date" id='from'/>
+        </div>
+    )
+}
+
 function InputSection(){
     return (
         <>
             <NameAndContactInputs/>
+            <Education/>
         </>
     )
 }
