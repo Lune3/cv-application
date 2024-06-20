@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {InputSection} from './components/inputs'
+import App from './App'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <InputSection/>
+    <App></App>
   </React.StrictMode>,
 )

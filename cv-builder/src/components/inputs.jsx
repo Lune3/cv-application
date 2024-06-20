@@ -1,6 +1,6 @@
 import {contacts} from './data';
 
-function NameAndContactInputs(){
+function NameAndContactInputs({query,onChange}){
     const contactsList = contacts.map(contact => {
         return (
             <li key={contact.id}>
@@ -11,7 +11,9 @@ function NameAndContactInputs(){
     return (
         <section>
             <h2>Name and contact info</h2>
-            <input type='text' placeholder="Your Name"/>
+            <form>
+                <input type='text' placeholder="Your Name" value={query} onChange={onChange} maxLength={50}/>
+            </form>
             <ul className='contactList'>{contactsList}</ul>
             <button>Update information</button>
         </section>
@@ -104,14 +106,14 @@ function Skills(){
 
 function InputSection(){
     return (
-        <>
+        <div>
             <NameAndContactInputs/>
             <Education/>
             <Experience/>
             <Projects/>
             <Skills/>
-        </>
+        </div>
     )
 }
 
-export {InputSection};
+export {InputSection,NameAndContactInputs };
