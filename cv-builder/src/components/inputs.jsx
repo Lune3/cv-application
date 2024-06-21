@@ -1,21 +1,22 @@
-import {contacts} from './data';
+import {contacts,userInformation} from './data';
+import { v4 as uuidv4 } from 'uuid';
 
-function NameAndContactInputs({query,onChange}){
+function NameAndContactInputs({query,onChange,userContact}){
     const contactsList = contacts.map(contact => {
         return (
             <li key={contact.id}>
-                <input type="text" placeholder={contact.contact}/>
+                <input type="text" placeholder={contact.contact} required/>
             </li>
         )
     })
     return (
         <section>
             <h2>Name and contact info</h2>
-            <form>
-                <input type='text' placeholder="Your Name" value={query} onChange={onChange} maxLength={50}/>
+            <input type='text' placeholder="Your Name" value={query} onChange={onChange} maxLength={50}/>
+            <form onSubmit={userContact}>
+                <ul className='contactList'>{contactsList}</ul>
+                <button type='submit'>Update information</button>
             </form>
-            <ul className='contactList'>{contactsList}</ul>
-            <button>Update information</button>
         </section>
     )
 }
@@ -116,4 +117,4 @@ function InputSection(){
     )
 }
 
-export {InputSection,NameAndContactInputs };
+export {NameAndContactInputs };
