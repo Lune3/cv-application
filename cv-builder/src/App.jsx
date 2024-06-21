@@ -31,10 +31,10 @@ function UpdateInfo({userInfo}){
 
 function UpdateEducation({userEducation}){
     const eduList = userEducation.map(edu => {
-        const userEdu = Object.keys(edu).map((keyName,i) =>{
+        const userEdu = Object.entries(edu).map(([keyName, value]) =>{
             if(keyName !== 'id'){
                 return (
-                    <li key={i}>{edu[keyName]}</li>
+                    <li key={keyName}>{value}</li>
                 )
             }
         })
@@ -43,8 +43,12 @@ function UpdateEducation({userEducation}){
                 {userEdu}
             </ul>
         )
-    })
-    return eduList;
+    }) 
+    return (
+        <>
+            {eduList}
+        </>
+    );
 }
 
 
@@ -52,7 +56,7 @@ export default function App(){
     const [currName,setName] = useState("Jake Resume");
     const [userInfo,setInfo] = useState([{text:"123-456-789",id:0},{text:"jake@gmail.com",id:1},{text:"linkedin.com/in/jake",id:2},{text:"github.com/Jake",id:3}]);
 
-    const [userEducation,setEducation] = useState(education);
+    const [userEducation,setEducation] = useState([]);
 
     function handleName(e){
         setName(e.target.value);
@@ -69,9 +73,7 @@ export default function App(){
 
     function handleEducation(e){
         e.preventDefault();
-        const newEducation = education;
-        newEducation.push({instituteName:e.target[0].value,major:e.target[1].value,place:e.target[2].value,to:e.target[2].value,from:e.target[2].value,id:uuidv4()});
-        console.log(newEducation);
+        const newEducation = [...userEducation,{instituteName:e.target[0].value,major:e.target[1].value,place:e.target[2].value,to:e.target[2].value,from:e.target[2].value,id:uuidv4()}];
         setEducation(newEducation);
         eraseInput(e);
     }
