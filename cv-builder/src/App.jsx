@@ -29,7 +29,7 @@ function UpdateInfo({userInfo}){
     )
 }
 
-function UpdateEducation({userEducation}){
+function UpdateEducation({userEducation,removeEducation}){
     const eduList = userEducation.map(edu => {
         const userEdu = Object.entries(edu).map(([keyName, value]) =>{
             if(keyName !== 'id'){
@@ -39,8 +39,9 @@ function UpdateEducation({userEducation}){
             }
         })
         return (
-            <ul key={edu.id}>
+            <ul id={edu.id} key={edu.id}>
                 {userEdu}
+                <button key={edu.id} onClick={removeEducation}>Remove</button>
             </ul>
         )
     }) 
@@ -73,9 +74,16 @@ export default function App(){
 
     function handleEducation(e){
         e.preventDefault();
-        const newEducation = [...userEducation,{instituteName:e.target[0].value,major:e.target[1].value,place:e.target[2].value,to:e.target[2].value,from:e.target[2].value,id:uuidv4()}];
+        const newEducation = [...userEducation,{instituteName:e.target[0].value,major:e.target[1].value,place:e.target[2].value,to:e.target[3].value,from:e.target[4].value,id:uuidv4()}];
         setEducation(newEducation);
         eraseInput(e);
+    }
+
+    function removeEducation(e){
+        let id = e.target.parentNode.id;
+        setEducation(userEducation.filter(edu =>{
+            return edu.id !== id;
+        }))
     }
 
     return(
@@ -90,7 +98,7 @@ export default function App(){
                     <UpdateInfo userInfo={userInfo}/> 
                 </header>
                 <div className="education">
-                    <UpdateEducation userEducation={userEducation}/>
+                    <UpdateEducation userEducation={userEducation} removeEducation={removeEducation}/>
                 </div>
             </section>
         </>
