@@ -29,31 +29,53 @@ function UpdateInfo({userInfo}){
     )
 }
 
-function UpdateEducation({userEducation,removeEducation}){
+function UpdateUserEducationAndExperience({ userEducation, removeEducation }) {
+    let expList = [];
     const eduList = userEducation.map(edu => {
-        const userEdu = Object.entries(edu).map(([keyName, value]) =>{
-            if(keyName !== 'id'){
-                return (
-                    <li key={keyName}>{value}</li>
-                )
-            }
-        })
-        return (
-            <ul key={edu.id}>
-                {userEdu}
-                <button onClick={() => removeEducation(edu.id)}>Remove</button>
-            </ul>
-        )
-    }) 
+            const userEdu = Object.entries(edu).map(([keyName, value]) => {
+                if (keyName !== 'id' && keyName !== 'description') {
+                    return (
+                        <li key={keyName}>{value}</li>
+                    )
+                }
+                if(keyName === 'description'){
+                    expList = value.map((exp,index) => {
+                        return (
+                            <li key={index}>{exp}</li>
+                        )
+                    })
+                }
+
+            })
+            return (
+                <ul key={edu.id}>
+                    <div className="userEducation">
+                        <div className="nameAndMajor">
+                            {[userEdu.slice(0,2)]}
+                        </div>
+                        <div className="placeAndDate">
+                            {[userEdu.slice(2,6)]}
+                        </div>
+                        <div>
+                            {expList}
+                        </div>
+                    </div>
+                    <button onClick={() => removeEducation(edu.id)}>Remove</button>
+                </ul>
+            )
+        
+    })
     return (
-        <>
+        <div>
             {eduList}
-        </>
+        </div>
     );
 }
 
-function UpdateExp(){
-
+function UpdateExp({userExperience,removeExperience}){
+    return (
+        <UpdateUserEducationAndExperience userEducation={userExperience}></UpdateUserEducationAndExperience>
+    )
 }
 
 
@@ -87,7 +109,7 @@ export default function App(){
                                                 from:e.target[4].value,
                                                 id:uuidv4()}];
         setEducation(newEducation);
-        eraseInput(e);
+        // eraseInput(e);
     }
 
     function removeEducation(e){
@@ -98,7 +120,6 @@ export default function App(){
 
     function handleExp(e){
         e.preventDefault();
-        // console.log(e);
         const newExp = [...userExperience,{title:e.target[0].value,
             name:e.target[1].value,
             place:e.target[2].value,
@@ -107,11 +128,16 @@ export default function App(){
             description:[],
             id:uuidv4()}];
 
-        for(let i = 5;i < e.target.length - 2;i++){
+        for(let i = 5;i < e.target.length - 3;i++){
             newExp[newExp.length - 1].description.push(e.target[i].value);
         }
 
-        console.log(newExp);
+        setExperience(newExp);
+
+    }
+
+    function removeExperience(){
+        
     }
 
     return(
@@ -129,11 +155,12 @@ export default function App(){
                 <div className="education">
                     <h1>Education</h1>
                     <hr />
-                    <UpdateEducation userEducation={userEducation} removeEducation={removeEducation}/>
+                    <UpdateUserEducationAndExperience userEducation={userEducation} removeEducation={removeEducation}/>
                 </div>
                 <div className="experience">
                     <h1>Experience</h1>
                     <hr />
+                    <UpdateExp userExperience={userExperience}/>
                 </div>
             </section>
         </>

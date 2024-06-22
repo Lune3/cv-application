@@ -45,7 +45,7 @@ function Experience({handleExperience}) {
     const [descriptionInput,setDescription] = useState([]);
 
     function addDescriptionInput(){
-        const newDescription = [...descriptionInput,<input key={uuidv4()} type='text' placeholder='Job Description'/>];
+        const newDescription = [...descriptionInput,<input key={uuidv4()} type='text' placeholder='Job Description' required/>];
         setDescription(newDescription);
     }
 
@@ -57,15 +57,15 @@ function Experience({handleExperience}) {
         <section className='experienceInput'>
             <h2>Experience</h2>
             <form onSubmit={handleExperience}>
-                <input type="text" placeholder='Job Title' />
-                <input type="text" placeholder='Company or Institute name' />
-                <input type="text" placeholder='place' />
+                <input type="text" placeholder='Job Title' required/>
+                <input type="text" placeholder='Company or Institute name' required/>
+                <input type="text" placeholder='place' required/>
                 <label htmlFor="to">To</label>
-                <input type="date" id='to' />
+                <input type="date" id='to' required/>
                 <label htmlFor="from">From</label>
-                <input type="date" id='from' />
+                <input type="date" id='from' required/>
                 <div>
-                    <input type="text" placeholder='Job Description' />
+                    <input type="text" placeholder='Job Description' required/>
                     {descriptionInput}
                     <button type='button' onClick={addDescriptionInput}>Add Description</button>
                     <button type='button' onClick={clearJobInput}>Remove Description?</button>
