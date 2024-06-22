@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { contacts } from './data';
+import { v4 as uuidv4 } from 'uuid';
 
 function NameAndContactInputs({ query, onChange, userContact }) {
     const contactsList = contacts.map(contact => {
@@ -38,27 +40,45 @@ function Education({ handleEducation }) {
     )
 }
 
-function Experience() {
+function Experience({handleExperience}) {
+
+    const [descriptionInput,setDescription] = useState([]);
+
+    function addDescriptionInput(){
+        const newDescription = [...descriptionInput,<input key={uuidv4()} type='text' placeholder='Job Description'/>];
+        setDescription(newDescription);
+    }
+
+    function clearJobInput(){
+        setDescription([]);
+    }
+
     return (
         <section className='experienceInput'>
             <h2>Experience</h2>
-            <input type="text" placeholder='Job Title' />
-            <input type="text" placeholder='Company or Institute name' />
-            <input type="text" placeholder='place' />
-            <label htmlFor="to">To</label>
-            <input type="date" id='to' />
-            <label htmlFor="from">From</label>
-            <input type="date" id='from' />
-            <div>
-                <input type="text" placeholder='Job Description' />
-                <button>Add Description</button>
-            </div>
-            <button>Add Experience</button>
+            <form onSubmit={handleExperience}>
+                <input type="text" placeholder='Job Title' />
+                <input type="text" placeholder='Company or Institute name' />
+                <input type="text" placeholder='place' />
+                <label htmlFor="to">To</label>
+                <input type="date" id='to' />
+                <label htmlFor="from">From</label>
+                <input type="date" id='from' />
+                <div>
+                    <input type="text" placeholder='Job Description' />
+                    {descriptionInput}
+                    <button type='button' onClick={addDescriptionInput}>Add Description</button>
+                    <button type='button' onClick={clearJobInput}>Remove Description?</button>
+                </div>
+                <button type='submit'>Add Experience</button>
+            </form>
         </section>
     )
 }
 
 function Projects() {
+
+
     return (
         <section className='projectsInput'>
             <h2>Project</h2>
@@ -105,4 +125,4 @@ function Skills() {
     )
 }
 
-export { NameAndContactInputs, Education };
+export { NameAndContactInputs,Education ,Experience};

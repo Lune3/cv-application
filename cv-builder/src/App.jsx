@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NameAndContactInputs ,Education} from "./components/inputs";
+import { NameAndContactInputs ,Education,Experience} from "./components/inputs";
 import { userInformation ,education} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -39,9 +39,9 @@ function UpdateEducation({userEducation,removeEducation}){
             }
         })
         return (
-            <ul id={edu.id} key={edu.id}>
+            <ul key={edu.id}>
                 {userEdu}
-                <button key={edu.id} onClick={removeEducation}>Remove</button>
+                <button onClick={() => removeEducation(edu.id)}>Remove</button>
             </ul>
         )
     }) 
@@ -52,12 +52,18 @@ function UpdateEducation({userEducation,removeEducation}){
     );
 }
 
+function UpdateExp(){
+
+}
+
 
 export default function App(){
     const [currName,setName] = useState("Jake Resume");
     const [userInfo,setInfo] = useState([{text:"123-456-789",id:0},{text:"jake@gmail.com",id:1},{text:"linkedin.com/in/jake",id:2},{text:"github.com/Jake",id:3}]);
 
     const [userEducation,setEducation] = useState([]);
+
+    const [userExperience,setExperience] = useState([]);
 
     function handleName(e){
         setName(e.target.value);
@@ -74,16 +80,38 @@ export default function App(){
 
     function handleEducation(e){
         e.preventDefault();
-        const newEducation = [...userEducation,{instituteName:e.target[0].value,major:e.target[1].value,place:e.target[2].value,to:e.target[3].value,from:e.target[4].value,id:uuidv4()}];
+        const newEducation = [...userEducation,{instituteName:e.target[0].value,
+                                                major:e.target[1].value,
+                                                place:e.target[2].value,
+                                                to:e.target[3].value,
+                                                from:e.target[4].value,
+                                                id:uuidv4()}];
         setEducation(newEducation);
         eraseInput(e);
     }
 
     function removeEducation(e){
-        let id = e.target.parentNode.id;
         setEducation(userEducation.filter(edu =>{
-            return edu.id !== id;
+            return edu.id !== e;
         }))
+    }
+
+    function handleExp(e){
+        e.preventDefault();
+        // console.log(e);
+        const newExp = [...userExperience,{title:e.target[0].value,
+            name:e.target[1].value,
+            place:e.target[2].value,
+            to:e.target[3].value,
+            from:e.target[4].value,
+            description:[],
+            id:uuidv4()}];
+
+        for(let i = 5;i < e.target.length - 2;i++){
+            newExp[newExp.length - 1].description.push(e.target[i].value);
+        }
+
+        console.log(newExp);
     }
 
     return(
@@ -91,6 +119,7 @@ export default function App(){
             <section className="inputSection">
                 <NameAndContactInputs query={currName} onChange={handleName} userContact={handleInfo}/>
                 <Education handleEducation={handleEducation}></Education>
+                <Experience handleExperience={handleExp}></Experience>
             </section>
             <section className="resumeSection">
                 <header>
@@ -98,7 +127,13 @@ export default function App(){
                     <UpdateInfo userInfo={userInfo}/> 
                 </header>
                 <div className="education">
+                    <h1>Education</h1>
+                    <hr />
                     <UpdateEducation userEducation={userEducation} removeEducation={removeEducation}/>
+                </div>
+                <div className="experience">
+                    <h1>Experience</h1>
+                    <hr />
                 </div>
             </section>
         </>
