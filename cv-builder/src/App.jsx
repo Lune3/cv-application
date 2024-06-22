@@ -74,7 +74,7 @@ function UpdateUserEducationAndExperience({ userEducation, removeEducation }) {
 
 function UpdateExp({userExperience,removeExperience}){
     return (
-        <UpdateUserEducationAndExperience userEducation={userExperience}></UpdateUserEducationAndExperience>
+        <UpdateUserEducationAndExperience userEducation={userExperience} removeEducation={removeExperience}></UpdateUserEducationAndExperience>
     )
 }
 
@@ -136,8 +136,10 @@ export default function App(){
 
     }
 
-    function removeExperience(){
-        
+    function removeExperience(e){
+        setExperience(userExperience.filter(edu =>{
+            return edu.id !== e;
+        }))
     }
 
     return(
@@ -160,7 +162,7 @@ export default function App(){
                 <div className="experience">
                     <h1>Experience</h1>
                     <hr />
-                    <UpdateExp userExperience={userExperience}/>
+                    <UpdateExp userExperience={userExperience} removeExperience={removeExperience}/>
                 </div>
             </section>
         </>
