@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NameAndContactInputs ,Education,Experience} from "./components/inputs";
+import { NameAndContactInputs ,Education,Experience,Projects} from "./components/inputs";
 import { userInformation ,education} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -31,7 +31,7 @@ function UpdateInfo({userInfo}){
 
 function UpdateUserEducationAndExperience({ userEducation, removeEducation }) {
     let expList = [];
-    const eduList = userEducation.map(edu => {
+    const eduList = userEducation.map(edu => {  
             const userEdu = Object.entries(edu).map(([keyName, value]) => {
                 if (keyName !== 'id' && keyName !== 'description') {
                     return (
@@ -78,14 +78,53 @@ function UpdateExp({userExperience,removeExperience}){
     )
 }
 
+function UpdateProject({userProject}){
+    let projectDescriptionList = [];
+    const projectList = userProject.map(project => {
+        const descriptionList = Object.entries(project).map(([key,value]) => {
+            if(key !== 'id' && key !== 'description'){
+                return (
+                    <li key={key}>{value}</li>
+                )
+            }
+            else if(key === 'description'){
+                projectDescriptionList = value.map((des,index) => {
+                    return (<li key={index}>{des}</li>)
+                }) 
+            }
+        })
+        return(
+            <ul key={project.id}>
+                <div>
+                    <div>
+                        {descriptionList.slice(0,2)}
+                    </div>
+                    <div>
+                        {descriptionList.slice(2,4)}
+                    </div>
+                </div>
+                <div>
+                    {projectDescriptionList}
+                </div>
+                <button type="button">Remove Project</button>
+            </ul>
+        )
+    })
+    return(
+        <div>
+            {projectList}
+        </div>
+    )
+}
+
 
 export default function App(){
     const [currName,setName] = useState("Jake Resume");
     const [userInfo,setInfo] = useState([{text:"123-456-789",id:0},{text:"jake@gmail.com",id:1},{text:"linkedin.com/in/jake",id:2},{text:"github.com/Jake",id:3}]);
-
     const [userEducation,setEducation] = useState([]);
-
     const [userExperience,setExperience] = useState([]);
+    const [userProject,setProject] = useState([]);
+    
 
     function handleName(e){
         setName(e.target.value);
@@ -109,7 +148,6 @@ export default function App(){
                                                 from:e.target[4].value,
                                                 id:uuidv4()}];
         setEducation(newEducation);
-        // eraseInput(e);
     }
 
     function removeEducation(e){
@@ -142,12 +180,27 @@ export default function App(){
         }))
     }
 
+    function handleProject(e){
+        e.preventDefault();
+        const newProject = [...userProject,{name:e.target[0].value,
+                                            tech:e.target[1].value,
+                                            to:e.target[2].value,
+                                            from:e.target[3].value,
+                                            description:[],
+                                            id:uuidv4()}];
+        for(let i = 4;i < e.target.length - 3;i++){
+            newProject[newProject.length - 1].description.push(e.target[i].value);
+        }
+        setProject(newProject);
+    }
+
     return(
         <>
             <section className="inputSection">
                 <NameAndContactInputs query={currName} onChange={handleName} userContact={handleInfo}/>
                 <Education handleEducation={handleEducation}></Education>
                 <Experience handleExperience={handleExp}></Experience>
+                <Projects handleProject={handleProject}></Projects>
             </section>
             <section className="resumeSection">
                 <header>
@@ -163,6 +216,11 @@ export default function App(){
                     <h1>Experience</h1>
                     <hr />
                     <UpdateExp userExperience={userExperience} removeExperience={removeExperience}/>
+                </div>
+                <div className="project">
+                    <h1>Project</h1>
+                    <hr />
+                    <UpdateProject userProject={userProject}></UpdateProject>
                 </div>
             </section>
         </>

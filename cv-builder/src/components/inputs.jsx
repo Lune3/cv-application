@@ -76,23 +76,36 @@ function Experience({handleExperience}) {
     )
 }
 
-function Projects() {
+function Projects({handleProject}) {
+    const [projectDescription,setProjectDescription] = useState([]) ;
 
+    function addProjectDescription(){
+        const newProjectDescription = [...projectDescription,<input key={uuidv4()} type='text' placeholder='Project Description' required/>]
+        setProjectDescription(newProjectDescription); 
+    }
+
+    function removeDescription(){
+        setProjectDescription([]);
+    }
 
     return (
         <section className='projectsInput'>
             <h2>Project</h2>
-            <input type="text" placeholder='Name of the project' />
-            <input type="text" placeholder='technology used' />
-            <label htmlFor="to">To</label>
-            <input type="date" id='to' />
-            <label htmlFor="from">From</label>
-            <input type="date" id='from' />
-            <div>
-                <input type="text" placeholder='project Description' />
-                <button>Add project Description</button>
-            </div>
-            <button>Submit project</button>
+            <form onSubmit={handleProject}>
+                <input type="text" placeholder='Name of the project' required/>
+                <input type="text" placeholder='technology used' required/>
+                <label htmlFor="to">To</label>
+                <input type="date" id='to' required/>
+                <label htmlFor="from">From</label>
+                <input type="date" id='from' required/>
+                <div>
+                    <input type="text" placeholder='project Description' required/>
+                    {projectDescription}
+                    <button type='button' onClick={addProjectDescription}>Add project Description</button>
+                    <button type='button' onClick={removeDescription}>Remove Description</button>
+                </div>
+                <button type='submit'>Submit project</button>
+            </form>
         </section>
     )
 }
@@ -125,4 +138,4 @@ function Skills() {
     )
 }
 
-export { NameAndContactInputs,Education ,Experience};
+export { NameAndContactInputs,Education ,Experience,Projects};
