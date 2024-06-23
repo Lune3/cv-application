@@ -110,32 +110,32 @@ function Projects({handleProject}) {
     )
 }
 
-function Skills() {
+function Skills({handleSkills}) {
     return (
         <section className='skillsInput'>
             <h2>Technical Skills</h2>
-            <div>
+            <form id='languageForm' onSubmit={handleSkills}>
                 <label htmlFor="language">Language</label>
-                <input type="text" id='language' />
-                <button>Add language</button>
-            </div>
-            <div>
+                <input type="text" id='language' required/>
+                <button type='submit'>Add language</button>
+            </form>
+            <form id='frameWorkForm' onSubmit={handleSkills}>
                 <label htmlFor="framework">Framework</label>
-                <input type="text" id='framework' />
-                <button>Add Framework</button>
-            </div>
-            <div>
+                <input type="text" id='framework' required/>
+                <button type='submit'>Add Framework</button>
+            </form>
+            <form id='toolsForm' onSubmit={handleSkills}>
                 <label htmlFor="developerTool">Developer Tool</label>
-                <input type="text" id='developerTool' />
-                <button>Add Developer Tool</button>
-            </div>
-            <div>
+                <input type="text" id='developerTool' required/>
+                <button type='submit'>Add Developer Tool</button>
+            </form>
+            <form id='libraryForm' onSubmit={handleSkills}>
                 <label htmlFor="libraries">Libraries</label>
-                <input type="text" id='libraries' />
-                <button>Add Library</button>
-            </div>
+                <input type="text" id='libraries' required/>
+                <button type='submit'>Add Library</button>
+            </form>
         </section>
     )
 }
 
-export { NameAndContactInputs,Education ,Experience,Projects};
+export { NameAndContactInputs,Education ,Experience,Projects,Skills};

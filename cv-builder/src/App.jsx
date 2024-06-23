@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NameAndContactInputs ,Education,Experience,Projects} from "./components/inputs";
+import { NameAndContactInputs ,Education,Experience,Projects, Skills} from "./components/inputs";
 import { userInformation ,education} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -78,7 +78,7 @@ function UpdateExp({userExperience,removeExperience}){
     )
 }
 
-function UpdateProject({userProject}){
+function UpdateProject({userProject,removeProject}){
     let projectDescriptionList = [];
     const projectList = userProject.map(project => {
         const descriptionList = Object.entries(project).map(([key,value]) => {
@@ -106,7 +106,7 @@ function UpdateProject({userProject}){
                 <div>
                     {projectDescriptionList}
                 </div>
-                <button type="button">Remove Project</button>
+                <button type="button" onClick={() => removeProject(project.id)}>Remove</button>
             </ul>
         )
     })
@@ -117,6 +117,19 @@ function UpdateProject({userProject}){
     )
 }
 
+function UpdateSkills({language,framework,tool,libraries}){
+
+    return(
+        <div>
+            <h3>Languages: <span>{language}</span></h3>
+            <h3>Framework: <span>{framework}</span></h3>
+            <h3>Tool: <span>{tool}</span></h3>
+            <h3>Libraries: <span>{libraries}</span></h3>
+        </div>
+    )
+}
+
+
 
 export default function App(){
     const [currName,setName] = useState("Jake Resume");
@@ -124,7 +137,10 @@ export default function App(){
     const [userEducation,setEducation] = useState([]);
     const [userExperience,setExperience] = useState([]);
     const [userProject,setProject] = useState([]);
-    
+    const [language,setLanguage] = useState("");
+    const [framework,setFrameWork] = useState("");
+    const [tools,setTools] = useState("");
+    const [libraries,setLibraries] = useState("");
 
     function handleName(e){
         setName(e.target.value);
@@ -148,6 +164,7 @@ export default function App(){
                                                 from:e.target[4].value,
                                                 id:uuidv4()}];
         setEducation(newEducation);
+        eraseInput(e);
     }
 
     function removeEducation(e){
@@ -171,7 +188,7 @@ export default function App(){
         }
 
         setExperience(newExp);
-
+        eraseInput(e);
     }
 
     function removeExperience(e){
@@ -192,6 +209,31 @@ export default function App(){
             newProject[newProject.length - 1].description.push(e.target[i].value);
         }
         setProject(newProject);
+        eraseInput(e);
+    }
+
+    function removeProject(id){
+        setProject(userProject.filter(project => project.id !== id))
+    }
+
+    function handleSkills(e){
+        e.preventDefault();
+        console.log(e);
+        switch(e.target.id){
+            case "languageForm":
+                setLanguage(language+`${e.target[0].value},`);
+                break;
+            case "frameWorkForm":
+                setFrameWork(framework+`${e.target[0].value},`);
+                break;
+            case "toolsForm":
+                setTools(tools+`${e.target[0].value},`);
+                break;
+            case "libraryForm":
+                setLibraries(libraries+`${e.target[0].value},`);
+                break;
+        }
+        eraseInput(e);
     }
 
     return(
@@ -201,6 +243,7 @@ export default function App(){
                 <Education handleEducation={handleEducation}></Education>
                 <Experience handleExperience={handleExp}></Experience>
                 <Projects handleProject={handleProject}></Projects>
+                <Skills handleSkills={handleSkills}></Skills>
             </section>
             <section className="resumeSection">
                 <header>
@@ -220,7 +263,12 @@ export default function App(){
                 <div className="project">
                     <h1>Project</h1>
                     <hr />
-                    <UpdateProject userProject={userProject}></UpdateProject>
+                    <UpdateProject userProject={userProject} removeProject={removeProject}></UpdateProject>
+                </div>
+                <div className="skills">
+                    <h1>Skills</h1>
+                    <hr />
+                    <UpdateSkills language={language} framework={framework} tool={tools} libraries={libraries}></UpdateSkills>
                 </div>
             </section>
         </>
