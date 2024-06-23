@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NameAndContactInputs ,Education,Experience,Projects, Skills} from "./components/inputs";
 import { userInformation ,education} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
-
+import './style.css';
 
 function eraseInput(e){
     for(let i = 0;i < e.target.length;i++){
@@ -19,7 +19,7 @@ function UpdateName({name}){
 function UpdateInfo({userInfo}){
     const infoList = userInfo.map(userContacts =>{
         return(
-            <li key={userContacts.id}>{userContacts.text}</li>
+            <li key={userContacts.id}><a href="">{userContacts.text}</a> |</li>
         )
     })
     return (
@@ -153,6 +153,7 @@ export default function App(){
         })
         eraseInput(e);
         setInfo(newContact);
+        
     }
 
     function handleEducation(e){
@@ -218,7 +219,6 @@ export default function App(){
 
     function handleSkills(e){
         e.preventDefault();
-        console.log(e);
         switch(e.target.id){
             case "languageForm":
                 setLanguage(language+`${e.target[0].value},`);

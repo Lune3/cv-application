@@ -1,0 +1,69 @@
+#root{
+    display: flex;
+    box-sizing: border-box;
+}
+
+.inputSection{
+    flex-basis: 900px;
+}
+
+.resumeSection{
+    flex-grow: 1;
+    padding: 10px 30px 20px 30px;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1{
+    margin-bottom: 0;
+    font-size: 2.5rem;
+}
+
+header ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 5px;
+}
+
+a{
+    color: black;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.education h1,.experience h1,.project h1,.skills h1{
+    margin-bottom: 0;
+    font-size: 1.7rem;
+}
+
+.education ul{
+    list-style: none;
+    display: flex;
+    padding: 15px;
+    margin: 0;
+}
+
+.userEducation{
+    flex-grow: 1;
+    display: flex;
+}
+
+.nameAndMajor{
+    flex: 1;
+}
+
+.nameAndMajor > li:nth-child(1){
+    font-weight: 600;
+}
+
+hr{
+    margin: 2px;
+}
+
