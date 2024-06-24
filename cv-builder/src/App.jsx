@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NameAndContactInputs ,Education,Experience,Projects, Skills} from "./components/inputs";
-import { userInformation ,education} from "./components/data";
+import { userInformation} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 import { format } from "date-fns";
@@ -50,16 +50,20 @@ function UpdateUserEducationAndExperience({ userEducation, removeEducation }) {
             })
             return (
                 <ul key={edu.id}>
-                    <div className="userEducation">
-                        <div className="nameAndMajor">
-                            {[userEdu.slice(0,2)]}
-                        </div>
-                        <div className="placeAndDate">
-                            {[userEdu.slice(2,5)]}
+                    <div className={edu.hasOwnProperty("description")? "userExperience" :"userEducation"}>
+                        <div className="heading"> 
+                            <div className={edu.hasOwnProperty("description")? "experienceNameAndMajor" :"nameAndMajor"}>
+                                {[userEdu.slice(0,2)]}
+                            </div>
+                            <div className={edu.hasOwnProperty("description")? "experiencePlaceAndDate" :"placeAndDate"}>
+                                {[userEdu.slice(2,5)]}
 
+                            </div>
                         </div>
                         <div>
+                            <ul className="expList">
                             {expList}
+                            </ul>
                         </div>
                     </div>
                     <button onClick={() => removeEducation(edu.id)}>Remove</button>
@@ -180,8 +184,7 @@ export default function App(){
         const newExp = [...userExperience,{title:e.target[0].value,
             name:e.target[1].value,
             place:e.target[2].value,
-            to:e.target[3].value,
-            from:e.target[4].value,
+            date:`${format(e.target[3].value,"MMM'.'YYY")} - ${format(e.target[4].value,"MMM'.'YYY")}`,
             description:[],
             id:uuidv4()}];
 

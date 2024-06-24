@@ -1,10 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
 #root{
     display: flex;
     box-sizing: border-box;
 }
 
 .inputSection{
-    flex-basis: 900px;
+    flex-basis: 750px;
 }
 
 .resumeSection{
@@ -57,25 +61,29 @@ a{
 }
 
 .userEducation{
-    flex-grow: 1;
+    flex-grow: 1; 
+}
+
+.heading{
     display: flex;
+    justify-content: space-between;
 }
 
 .nameAndMajor{
     flex: 1;
 }
 
-.nameAndMajor > li:nth-child(1){
+.nameAndMajor > li:nth-child(1) ,.experienceNameAndMajor > li:nth-child(1){
     font-weight: 600;
     font-size: 1.3rem;
     margin-bottom: 5px;
 }
 
-.nameAndMajor > li:nth-child(2){
+.nameAndMajor > li:nth-child(2), .experienceNameAndMajor > li:nth-child(2){
     font-size: 1.1rem;
 }
 
-.placeAndDate li:nth-child(1){
+.placeAndDate li:nth-child(1), .experiencePlaceAndDate li:nth-child(1){
     font-size: 1.2rem;
     margin-bottom: 5px;
 }
@@ -83,4 +91,30 @@ a{
 hr{
     margin: 2px;
 }
+
+.experience ul:not(.expList){
+    display: flex;
+    list-style: none;
+    padding: 5px 15px 0px 15px; 
+    margin: 0;
+    gap: 10px;
+}
+
+.experience button{
+    height: min-content;
+}
+
+.userExperience{
+    flex-grow: 1;
+}
+
+.expList{
+    font-size: 1.1rem;
+    padding-left: 30px;
+    margin: 5px 0px 5px 0px;
+}
+
+
+
+
 
