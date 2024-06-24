@@ -102,17 +102,21 @@ function UpdateProject({userProject,removeProject}){
         return(
             <ul key={project.id}>
                 <div>
-                    <div>
-                        {descriptionList.slice(0,2)}
+                    <div className="projectHeading">
+                        <div className="projectNameAndSkills">
+                            {descriptionList.slice(0,2)}
+                        </div>
+                        <div className="projectDate">
+                            {descriptionList.slice(2,4)}
+                        </div>
                     </div>
-                    <div>
-                        {descriptionList.slice(2,4)}
+                    <div className="projectList">
+                        <ul className="projectDescription">
+                            {projectDescriptionList}
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    {projectDescriptionList}
-                </div>
-                <button type="button" onClick={() => removeProject(project.id)}>Remove</button>
+            <button type="button" onClick={() => removeProject(project.id)}>Remove</button>
             </ul>
         )
     })
@@ -204,10 +208,10 @@ export default function App(){
 
     function handleProject(e){
         e.preventDefault();
-        const newProject = [...userProject,{name:e.target[0].value,
+        const newProject = [...userProject,{name:`${e.target[0].value} |`,
                                             tech:e.target[1].value,
-                                            to:e.target[2].value,
-                                            from:e.target[3].value,
+                                            to:`${format(e.target[2].value,"MMM'.'YYY")} -`,
+                                            from:`${format(e.target[3].value,"MMM'.'YYY")}`,
                                             description:[],
                                             id:uuidv4()}];
         for(let i = 4;i < e.target.length - 3;i++){

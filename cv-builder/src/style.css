@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oxygen:wght@300;400;700&display=swap');
+
 *{
     box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif;
 }
 
 #root{
@@ -44,7 +47,7 @@ a{
 
 .education h1,.experience h1,.project h1,.skills h1{
     margin-bottom: 0;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
 }
 
 .education ul{
@@ -112,6 +115,64 @@ hr{
     font-size: 1.1rem;
     padding-left: 30px;
     margin: 5px 0px 5px 0px;
+}
+
+.project ul:not(.projectDescription){
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.project > div{
+    margin-top: 8px;
+}
+
+.project ul>div:nth-child(1){
+    flex-grow: 1;
+}
+
+.projectHeading{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+.projectHeading>div{
+    display: flex;
+    gap: 3px; 
+    font-size: 1.1rem;
+}
+
+.project button{
+    height: min-content;
+}
+
+.projectNameAndSkills {
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.projectNameAndSkills li:nth-child(1){
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.projectList{
+    font-size: 1.2rem;
+}
+
+.projectDescription > li::marker{
+    color: black;
+}
+
+.skills h3{
+    margin: 5px;
+}
+
+.skills h3 span{
+    font-weight: 400;
 }
 
 
