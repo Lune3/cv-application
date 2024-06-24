@@ -3,6 +3,7 @@ import { NameAndContactInputs ,Education,Experience,Projects, Skills} from "./co
 import { userInformation ,education} from "./components/data";
 import { v4 as uuidv4 } from 'uuid';
 import './style.css';
+import { format } from "date-fns";
 
 function eraseInput(e){
     for(let i = 0;i < e.target.length;i++){
@@ -54,7 +55,8 @@ function UpdateUserEducationAndExperience({ userEducation, removeEducation }) {
                             {[userEdu.slice(0,2)]}
                         </div>
                         <div className="placeAndDate">
-                            {[userEdu.slice(2,6)]}
+                            {[userEdu.slice(2,5)]}
+
                         </div>
                         <div>
                             {expList}
@@ -161,8 +163,7 @@ export default function App(){
         const newEducation = [...userEducation,{instituteName:e.target[0].value,
                                                 major:e.target[1].value,
                                                 place:e.target[2].value,
-                                                to:e.target[3].value,
-                                                from:e.target[4].value,
+                                                date:`${format(e.target[3].value,"MMM'.'YYY")} - ${format(e.target[4].value,"MMM'.'YYY")}`,
                                                 id:uuidv4()}];
         setEducation(newEducation);
         eraseInput(e);

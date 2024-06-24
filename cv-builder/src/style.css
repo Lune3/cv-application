@@ -46,8 +46,14 @@ a{
 .education ul{
     list-style: none;
     display: flex;
-    padding: 15px;
+    padding: 5px 15px 0px 15px;
     margin: 0;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.education ul button{
+    height: min-content;
 }
 
 .userEducation{
@@ -61,6 +67,17 @@ a{
 
 .nameAndMajor > li:nth-child(1){
     font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.nameAndMajor > li:nth-child(2){
+    font-size: 1.1rem;
+}
+
+.placeAndDate li:nth-child(1){
+    font-size: 1.2rem;
+    margin-bottom: 5px;
 }
 
 hr{
