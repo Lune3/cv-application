@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oxygen:wght@300;400;700&display=swap');
+@page { size: auto;  margin: 0mm; }
 
 *{
     box-sizing: border-box;
     font-family: "Noto Sans", sans-serif;
+}
+
+@media print {
+    .inputSection{
+        display: none;
+    }
+    button{
+        display: none;
+    }
 }
 
 #root{

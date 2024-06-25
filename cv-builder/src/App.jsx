@@ -278,6 +278,7 @@ export default function App(){
                     <hr />
                     <UpdateSkills language={language} framework={framework} tool={tools} libraries={libraries}></UpdateSkills>
                 </div>
+                <button onClick={() => window.print()}>Print</button>
             </section>
         </>
     )
